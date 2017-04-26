@@ -1,0 +1,83 @@
+﻿@model ICollection<AzureTestApp.Model.PatientDetailsViewModel>
+<div class="container" style="background-color:#F4F4F5; height:400px; padding:50px 100px">
+
+    <div id="AddNoteDetail" class="w3-card-4" style="width:750px;background-color:#FFFFFF; height:200px; margin-left:100px; margin-top:10px">
+        <header class="w3-container w3-blue">
+            <h4>Task Details &nbsp;<i class="glyphicon glyphicon-tasks"></i></h4>
+        </header>
+
+        <div class="w3-container" style="margin:20px; height:195px;width:700px; float:left">
+
+            <div class="w3-cell-row" style="height:50px; margin-bottom:15px">
+                <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:180px ">
+                    Patient Name
+                </div>
+                <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:140px">
+                    Task Type
+                </div>
+                <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;width:140px ">
+                    Due Date
+                </div>
+                <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:140px ">
+                    Completed
+                </div>
+                <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:140px;padding-left:35px ">
+                    Action
+                </div>
+            </div>
+
+            @if (Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="w3-container  w3-cell w3-cell-middle" style="min-width:150px; width:200px;text-align:center;padding-left:0px">
+                        @item.vmPatientTable.Name
+                    </div>
+                        <div class="w3-container  w3-cell w3-cell-middle" style="min-width:140px;text-align:center;">
+                            @item.vmTaskTable.TaskType
+                        </div>
+                        <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;text-align:center">
+                            @item.vmTPOT.DueDate.Value.ToString("dd/MM/yyyy")
+                        </div>
+                        <div class="w3-container  w3-cell w3-cell-middle" style="min-width:130px;text-align:center">
+                            @item.vmTPOT.Completed
+                        </div>
+                        @if (@item.vmTPOT.Completed == true)
+                        {
+                            <div class="w3-container  w3-cell w3-cell-middle" style="min-width:130px;text-align:center">
+                                <span onclick=""><i style="margin-left:10px;cursor:pointer;" class="btn btn-sm btn-danger glyphicon glyphicon-ban-circle disabled"></i></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="w3-container  w3-cell w3-cell-middle" style="min-width:130px;text-align:center">
+                                <span onclick="completeTask('@item.vmPatientTable.PpsNo','@item.vmTPOT.OtTaskId')"><i style="margin-left:10px;cursor:pointer;" class="btn btn-sm btn-success glyphicon glyphicon-ok-sign"></i></span>
+                            </div>
+                        }
+                        <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        /**********Complete a Task**********/
+        function completeTask(patientId, taskId) {
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("CompleteTask")',
+                data: { id: patientId, pid: taskId },
+                success: function (data) {
+                    window.location = '/Home/Welcome';
+                },
+                error: function (data) {
+                    $('#AddNoteDetail').fadeIn("slow");
+                    $('#AddNoteDetail').html('<h3>Error in retrieval of Details (CompleteTask)</h3>');
+                }
+            });
+        }
+    </script>
+}

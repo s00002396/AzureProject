@@ -1,0 +1,241 @@
+﻿@model ICollection<AzureTestApp.Model.PatientDetailsViewModel>
+
+@if (ViewBag.Message != null)
+{
+    <div class="form-control">
+        <div class="col-md-12" style="color:blue">
+            @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
+        </div>
+    </div>
+}
+<div class="container" style="background-color:#FfFfFf; height:600px">
+    <div class="w3-container">
+        <h2 class="glyphicon glyphicon-user" style="color:#2196F3"><span>&nbsp;Patient Details</span></h2>
+    </div>
+
+    <div class="w3-cell-row" style="height:50px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Assigned To
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Social Security
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Student Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px ">
+            Address Line1
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;width:100px ">
+            City
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            County
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Guardian Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Phone
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            School Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Open Date
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Close Date
+        </div>
+    </div>
+
+    <div class="w3-cell-row" style="height:50px">
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:100px;text-align:center">
+                    @item.vmUserAcc.FirstName
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;text-align:center;">
+                    @item.vmPatientTable.SocialSecurityNo
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:120px;text-align:center">
+                    @item.vmPatientTable.Name
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:130px;text-align:center">
+                    @item.vmPatientTable.AddressLineOne
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="min-width:100px; text-align:left;padding-left:30px">
+                    @item.vmPatientTable.City
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="width:0px;text-align:center;padding-left:30px">
+                    @item.vmPatientTable.County
+                </div>
+
+                <div class="w3-container w3-cell w3-cell-middle" style="min-width:130px; text-align:center">
+                    @item.vmGuardian.Name
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="min-width:60px;text-align:center">
+                    @item.vmGuardian.PhoneNo
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:100px;width:110px;padding-right:40px; text-align:center;margin-right:10px;">
+                    @item.vmSchools.SchoolName
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="min-width:30px;width:30px;padding-right:10px;text-align:left;  margin-right:100px;">
+                    @item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")
+                </div>
+                <div class="w3-container  w3-cell w3-cell-middle" style="min-width:110px;width:30px; text-align:center">
+                    @item.vmPatientTable.CloseDate.ToString()
+                </div>
+                <br />
+            }
+        }
+        else
+        {
+            <p>No records found.</p>
+        }
+    </div>@*Row*@
+    <hr />
+
+    <div class="w3-container  w3-cell w3-cell-middle" style="background-color:white; padding-bottom:15px">
+        @foreach (var item in Model)
+        {
+            <div class="w3-container  w3-cell w3-cell-middle" style="float:right; color:#2196F3">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="backToHome('@item.vmPatientTable.PpsNo')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-home"></i> &nbsp;Home</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span onclick="backToTasks('@item.vmPatientTable.PpsNo')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-backward"></i> &nbsp;Back to Patient List</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <span onclick="viewNotes('@item.vmPatientTable.PpsNo')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-info-sign"></i></span>&nbsp;View Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <span onclick="addNote('@item.vmPatientTable.PpsNo')"><i style="margin-left:10px;cursor:pointer;" class="glyphicon glyphicon-tasks"></i> &nbsp;Add Note</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <span onclick="addTask('@item.vmPatientTable.PpsNo')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-paperclip"></i> &nbsp;Add Task</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <span onclick="reassignPatient('@item.vmPatientTable.PpsNo')"><i style="margin-left:10px; cursor:pointer" class="glyphicon glyphicon-share"></i> &nbsp;Reassign Patient</span>
+            </div>
+        }
+    </div>
+    <div id="Error"></div>
+    <div id="AddNoteDetail"></div> @*AddNote*@
+    <div id="ReassignPatientDetail"></div>@*ReassignPatient*@
+    <div id="NoteDetail"></div> @*View Notes*@
+    <div id="TaskDetail"></div> @*Add Task*@
+</div>@*Container*@
+
+@section scripts
+{
+    <script>
+        /**********view Patient Notes**********/
+        function viewNotes(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("PatientNotes")',
+                data: { id: patientId },
+                success: function (data) {
+                    $('#NoteDetail').hide();
+                    $('#AddNoteDetail').hide();
+                    $('#Detail1').hide();
+                    $('#TaskDetail').hide();
+                    $('#ReassignPatientDetail').hide();
+                    $('#NoteDetail').html(data);
+                    $('#NoteDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                    $('#NoteDetail').html('<h3>Error in retrieval</h3>');
+                }
+            });
+        }
+        /**********Add A Note**********/
+        function addNote(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("AddNote")',
+                data: { id: patientId },
+                success: function (data) {
+                    $('#NoteDetail').hide();
+                    $('#Detail1').hide();
+                    $('#ReassignPatientDetail').hide();
+                    $('#TaskDetail').hide();
+                    $('#AddNoteDetail').html(data);
+                    $('#AddNoteDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                    $('#AddNoteDetail').fadeIn("slow");
+                    $('#AddNoteDetail').html('<h3>Error in retrieval of Details (Add note)</h3>');
+                }
+            });
+        }
+        /**********Add A Task**********/
+        function addTask(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("AddTask")',
+                data: { id: patientId },
+                success: function (data) {
+                    $('#NoteDetail').hide();
+                    $('#Detail1').hide();
+                    $('#AddNoteDetail').hide();
+                    $('#ReassignPatientDetail').hide();
+                    $('#TaskDetail').hide();
+                    $('#TaskDetail').html(data);
+                    $('#TaskDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                    $('#TaskDetail').fadeIn("slow");
+                    $('#TaskDetail').html('<h3>Error in retrieval of Details (Add Task)</h3>');
+                }
+            });
+        }
+        /*********Back To Home**************/
+        function backToHome(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Welcome")',
+                data: { id: patientId },
+                success: function (data) {
+                    window.location = '/Home/Welcome';
+                },
+                error: function (data) {
+                    $('#Error').fadeIn("slow");
+                    $('#Error').html('<h3>Error in retrieval of Details (backToTasks)</h3>');
+                }
+            });
+        }
+        /*********Back To Patients**************/
+        function backToTasks(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ViewAllPatients")',
+                data: { id: patientId },
+                success: function (data) {
+                    window.location = '/Home/ViewAllPatients';
+                },
+                error: function (data) {
+                    $('#Error').fadeIn("slow");
+                    $('#Error').html('<h3>Error in retrieval of Details (backToTasks)</h3>');
+                }
+            });
+        }
+        /**********Reassign Patient**********/
+        function reassignPatient(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ReassignPatient")',
+                data: { id: patientId },
+                success: function (data) {
+                    $('#NoteDetail').hide();
+                    $('#AddNoteDetail').hide();
+                    $('#TaskDetail').hide();
+                    $('#Detail1').hide();
+                    $('#ReassignPatientDetail').html(data);
+                    $('#ReassignPatientDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                    alert("Error ");
+                    $('#ReassignPatientDetail').fadeIn("slow");
+                    $('#ReassignPatientDetail').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
+                }
+            });
+        }
+    </script>
+}

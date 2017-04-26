@@ -1,0 +1,99 @@
+﻿@model ICollection<AzureTestApp.Model.PatientDetailsViewModel>
+<div class="w3-container">
+    <h2 class="glyphicon glyphicon-user" style="color:#2196F3; margin-bottom:15px"><span>&nbsp;All Patients</span></h2>
+</div>
+<div class="w3-cell-row" style="height:50px">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Assigned To
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Social Security
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Student Name
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Address Line1
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        City
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        County
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Guardian Name
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Phone
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        School Name
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Open Date
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        View
+    </div>
+</div>
+<div class="w3-container  w3-cell w3-cell-middle" style="background-color:white">
+
+</div>
+<div class="panel-body" style="height:398px">
+    <div class="right-inner-addon" style="width:105px;">
+        @if (Model.Any())
+        {
+            <table class="table table-condensed table-hover table-striped" style="width:1122px">
+                @foreach (var item in Model)
+                {
+                    <tr style="height:50px !important">
+                        <td style="width:100px !important;">@item.vmUserAcc.FirstName</td>
+                        <td style="width:150px !important;text-align:center">@item.vmPatientTable.SocialSecurityNo</td>
+                        <td style="width:130px !important;">@item.vmPatientTable.Name</td>
+                        <td style="width:130px !important">@item.vmPatientTable.AddressLineOne</td>
+                        <td style="width:70px !important;text-align:center">@item.vmPatientTable.City</td>
+                        <td style="width:70px !important;text-align:center">@item.vmPatientTable.County</td>
+                        <td style="width:150px !important;text-align:center">@item.vmGuardian.Name</td>
+                        <td style="width:80px !important;text-align:center">@item.vmGuardian.PhoneNo</td>
+                        <td style="width:120px !important;text-align:center">@item.vmSchools.SchoolName</td>
+                        <td style="width:110px !important;text-align:center">@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.vmPatientTable.CloseDate.ToString()</td>
+                        <td>
+                            <div class="w3-container  w3-cell w3-cell-middle" style="color:#2196F3">
+                                <span onclick="showPatient('@item.vmPatientTable.PpsNo')"><i style="margin-left:10px;color:#2196F3" class="glyphicon glyphicon-eye-open"></i></span>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>No records found.</p>
+        }
+    </div>
+</div>
+<div id="Detail2"></div>
+<div id="Detail3"></div>
+<div id="Detail"></div>
+
+@section scripts
+{
+    <script>
+        function showPatient(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Details")',
+                data: { id: patientId },
+                success: function (data) {
+                    window.location = '/Home/Details/' + patientId;
+                },
+                error: function (data) {
+                    $('#Detail').html('<h3>Error in retrieval</h3>');
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,52 @@
+﻿@model ICollection<AzureTestApp.Model.PatientDetailsViewModel>
+
+<div class="w3-cell-row" style="height:35px">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:120px ">
+        Patient Name
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;width:120px ">
+        Address
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Guardian Name
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Open Date
+    </div>
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+        Delete
+    </div>
+</div>
+
+<div class="panel-body" style="height:383px">
+    <div class="right-inner-addon" style="width:569px">
+        @if (ViewBag.Message != null)
+        {
+            <div class="form-control">
+                <div class="col-md-12" style="color:blue">
+                    @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
+                </div>
+            </div>
+        }
+        @if (Model.Any())
+        {
+            <table class="table table-condensed table-hover">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width:95px !important; padding-right:20px; width:120px !important`; height:50px !important">@item.vmPatientTable.Name</td>
+                        <td style="padding-left:20px">@item.vmPatientTable.AddressLineOne</td>
+                        <td style="padding-right:20px">@item.vmGuardian.Name</td>
+                        <td style="padding-right:40px">@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")</td>
+
+                        <td style="padding-right:20px;">@Html.ActionLink("x", "DeletePatient1", new { id = item.vmPatientTable.PpsNo }, new { @class = "btn btn-danger btn-xs" })</td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>No records found.</p>
+        }
+    </div>
+</div>
