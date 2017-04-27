@@ -1,0 +1,68 @@
+﻿@model ICollection<AzureTestApp.Model.PatientDetailsViewModel>
+<h5 style="float:left;margin-bottom:15px;padding:5px">Remove OT</h5>
+<h6 style="float:left;margin-bottom:15px;padding:5px">*Reassign patients for this therapist</h6>
+<div class="container" style="background-color:#F4F4F5; height:500px">
+    <section style="width:900px; margin-left:0px; margin-right:0px; background-color:lightcoral">
+        <section style="height:50px;width:590px;float:left;margin-left:100px; margin-top:0px ">
+            <ul class="nav nav-tabs" style="background-color:white">
+                <li class="active test" style="color:blue"><a data-toggle="tab" href="#home">Reassign Patients <span><i>(Step 2 of 3)</i></span></a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="home1" class="tab-pane fade in active">
+                    <div class="box" style="width:790px;">
+                        <div class="w3-card-4" style="background-color:#FFFFFF; ">
+                            @Html.Partial("_ReAssignPatientDelete", Model)
+
+                            @*@Html.Partial("_ReAssignTasks_Delete", Model)*@
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+
+@section scripts
+{
+    <script>
+    /**********Reassign Patient**********/
+        function reassignPatient12(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Therapist_Patient_Details")',
+                data: { id: patientId },
+                success: function (data) {
+                $('#NoteDetail').hide();
+                $('#AddNoteDetail').hide();
+                $('#TaskDetail').hide();
+                $('#Detail1').hide();
+                $('#ReassignPatientDetail').html(data);
+                $('#ReassignPatientDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                alert("Error ");
+                $('#ReassignPatientDetail').fadeIn("slow");
+                $('#ReassignPatientDetail').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
+                }
+                });
+        }
+        function reassignPatient1(patientId) {
+            $.ajax({
+                type: "GET",
+                @*url: '@Url.Action("Therapist_Patient_Details")',*@
+                url: '@Url.Action("Therapist_Patient_Details_For_Deleting")',
+                data: { id: patientId },
+                success: function (data) {
+                    window.location = '/Home/Therapist_Patient_Details_For_Deleting/' + patientId;
+                },
+                error: function (data) {
+                    alert("Error ");
+                    $('#ReassignPatientDetail').fadeIn("slow");
+                    $('#ReassignPatientDetail').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
+                }
+            });
+        }
+    </script>
+}
+

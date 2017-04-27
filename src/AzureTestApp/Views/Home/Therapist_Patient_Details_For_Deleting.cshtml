@@ -1,0 +1,132 @@
+﻿@model ICollection<AzureTestApp.Model.PatientDetailsViewModel>
+<h3>Reassign patients</h3>
+@if (Model.Count > 0)
+{
+    <div class="w3-cell-row" style="height:35px; margin-top:10px">
+
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:180px">
+            Patient Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:180px">
+            Guardian Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:180px">
+            School Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:180px ">
+            Reassign Patient
+        </div>
+    </div>
+    <div class="panel-body" style="height:auto">
+        <div class="right-inner-addon" style="width:569px">
+            @if (ViewBag.Message != null)
+            {
+                <div class="form-control">
+                    <div class="col-md-12" style="color:blue">
+                        @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
+                    </div>
+                </div>
+            }
+            @if (Model.Any())
+            {
+                <table class="table table-condensed table-hover" style="width:715px;margin-left:195px">
+                    @foreach (var item in Model)
+                    {
+                        <tr style="width:895px !important;">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <td style="width:195px !important">@item.vmPatientTable.Name</td>
+
+                                <td style="width:195px !important">@item.vmGuardian.Name</td>
+                                <td style="width:165px !important">@item.vmSchools.SchoolName</td>
+                                <td onclick="reassignPatient('@item.vmPatientTable.PpsNo')"><i style="margin-left:10px; cursor:pointer; color:green;padding-left:35px;" id="reassignPatient" class="glyphicon glyphicon-share"></i></td>
+                            }@*end Using*@
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>Ok to Reassign.</p>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="w3-cell-row" style="height:35px; margin-top:10px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:145px">
+            Patient Name
+        </div>
+
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+            Guardian Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:150px">
+            School Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+            Task Type
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px">
+            Due Date
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Assign to
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px ">
+            Action
+        </div>
+    </div>
+    <h2>OT has no patients</h2>
+    <p style="float:right">@Html.ActionLink("Next", "RemoveOTNextLast", new { id = ViewBag.OT_Id }, new { @class = "btn btn-info", @style = "margin-top:10px" })</p>
+}
+<p>@Html.ActionLink("Back", "RemoveOTNext", new { id = ViewBag.OT_Id }, new { @class = "btn btn-info", @style = "margin-top:10px" })</p>
+<div id="ReassignPatientDetail1"></div>
+@section scripts
+{
+    <script>
+        /**********Reassign Patient**********/
+        function reassignPatient(patientId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ReassignPatientDelete")',
+                data: { id: patientId },
+                success: function (data) {
+                    $('#NoteDetail').hide();
+                    $('#AddNoteDetail').hide();
+                    $('#TaskDetail').hide();
+                    $('#Detail1').hide();
+                    $('#ReassignPatientDetail1').html(data);
+                    $('#ReassignPatientDetail1').fadeIn("slow");
+                },
+                error: function (data) {
+                    alert("Error ");
+                    $('#ReassignPatientDetail1').fadeIn("slow");
+                    $('#ReassignPatientDetail1').html('<h3>Error in retrieval of ReassignPatientDelete Details(Reassing Patient) </h3>');
+                }
+            });
+        }
+        /**********Reassign Patient**********/
+        function ReassignDetails(patientId, userId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ReassignDetails")',
+                data: { id: patientId, id2: userId },
+                success: function (data) {
+                    $('#AddNoteDetail').hide();
+                    $('#AddNoteDetail').html(data);
+                    $('#AddNoteDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                    alert("Error ReassignDetails");
+                    $('#ReassignDetails').fadeIn("slow");
+                    $('#ReassignDetails').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
+                }
+            });
+        }
+    </script>
+}
+

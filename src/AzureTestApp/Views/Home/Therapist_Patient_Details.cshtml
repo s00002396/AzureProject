@@ -1,0 +1,124 @@
+﻿@model ICollection<AzureTestApp.Model.PatientDetailsViewModel>
+
+@if (Model.Count > 0)
+{
+    <h2>Patients with pending tasks for @Model.FirstOrDefault().vmUserAcc.FirstName</h2>
+    <div class="w3-cell-row" style="height:35px; margin-top:10px">
+
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px">
+            Patient Name
+        </div>
+
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px">
+            Guardian Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:165px">
+            School Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:195px">
+            Task Type
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px">
+            Due Date
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px ">
+            Edit
+        </div>
+    </div>
+    <div class="panel-body" style="height:auto;">
+        <div class="right-inner-addon" style="width:569px">
+            @if (ViewBag.Message != null)
+            {
+                <div class="form-control">
+                    <div class="col-md-12" style="color:blue">
+                        @ViewBag.Message<i class="glyphicon glyphicon-ok" style="color:lime"></i>
+                    </div>
+                </div>
+            }
+            @if (Model.Any())
+            {
+                <table class="table table-condensed table-hover" style="width:1000px;margin-left:45px;">
+                    @foreach (var item in Model)
+                    {
+                        <tr style="width:895px !important">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <td style="width:195px !important;padding-left:60px">@item.vmPatientTable.Name</td>
+
+                                <td style="width:195px !important;padding-left:25px">@item.vmGuardian.Name</td>
+                                <td style="width:165px !important">@item.vmSchools.SchoolName</td>
+                                <td style="width:175px !important; padding-left:0px">@item.vmTaskTable.TaskType</td>
+
+                                <td style="width:185px !important">@item.vmTPOT.DueDate.Value.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <span onclick="ReassignDetails('@item.vmTPOT.OtTaskId', '@item.vmUserAcc.UserId')"><i style="margin-left:10px; cursor:pointer; color:green" class="glyphicon glyphicon-pencil"></i> &nbsp;</span>
+                                </td>
+                            }@*end Using*@
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>Ok to Reassign.</p>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="w3-cell-row" style="height:35px; margin-top:10px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:145px">
+            Patient Name
+        </div>
+
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+            Guardian Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:150px">
+            School Name
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+            Task Type
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px">
+            Due Date
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+            Assign to
+        </div>
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px ">
+            Action
+        </div>
+    </div>
+    <h2>OT has no outstanding tasks</h2>
+    <p style="float:right">@Html.ActionLink("Next", "RemoveOTNext", new { id = ViewBag.OT_Id }, new { @class = "btn btn-info", @style = "margin-top:10px" })</p>
+}
+<p>@Html.ActionLink("Back", "RemoveOT", new { id = ViewBag.OT_Id }, new { @class = "btn btn-info", @style = "margin-top:10px" })</p>
+<div id="AddNoteDetail"></div> @*AddNote*@
+@section scripts
+{
+    <script>
+
+        /**********Reassign Patient**********/
+        function ReassignDetails(patientId, userId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ReassignDetails")',
+                data: { id: patientId, id2: userId },
+                success: function (data) {
+                    $('#AddNoteDetail').hide();
+                    $('#AddNoteDetail').html(data);
+                    $('#AddNoteDetail').fadeIn("slow");
+                },
+                error: function (data) {
+                    alert("Error ReassignDetails");
+                    $('#ReassignDetails').fadeIn("slow");
+                    $('#ReassignDetails').html('<h3>Error in retrieval of Details(Reassing Patient) </h3>');
+                }
+            });
+        }
+    </script>
+}
+
