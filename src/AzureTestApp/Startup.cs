@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AzureTestApp;
+using AzureTestApp.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace AzureTestApp
 {
@@ -33,6 +35,8 @@ namespace AzureTestApp
             services.AddDistributedMemoryCache();
             services.AddSession();
             //services.AddTransient<IApptService, IApptService>();
+        //    services.AddDbContext<FYP_ProjectContext>(options =>
+        //options.UseSqlServer(Configuration.GetConnectionString("FYP_Project")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,38 +2,38 @@
 <div class="w3-container">
     <h2 class="glyphicon glyphicon-user" style="color:#2196F3; margin-bottom:15px"><span>&nbsp;All Patients</span></h2>
 </div>
-<div class="w3-cell-row" style="height:50px">
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+<div id="AllPatientsRow" class="w3-cell-row" style="height:50px;">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients" >
         Assigned To
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients">
         Social Security
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients">
         Student Name
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients">
         Address Line1
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients">
         City
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients">
         County
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients">
         Guardian Name
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients">
         Phone
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients">
         School Name
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients" style="width:100px !important">
         Open Date
     </div>
-    <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
+    <div class="w3-container w3-blue w3-cell w3-cell-middle" id="ViewAllPatients">
         View
     </div>
 </div>
@@ -48,23 +48,23 @@
                 @foreach (var item in Model)
                 {
                     <tr style="height:50px !important">
-                        <td style="width:100px !important;">@item.vmUserAcc.FirstName</td>
-                        <td style="width:150px !important;text-align:center">@item.vmPatientTable.SocialSecurityNo</td>
-                        <td style="width:130px !important;">@item.vmPatientTable.Name</td>
-                        <td style="width:130px !important">@item.vmPatientTable.AddressLineOne</td>
-                        <td style="width:70px !important;text-align:center">@item.vmPatientTable.City</td>
-                        <td style="width:70px !important;text-align:center">@item.vmPatientTable.County</td>
-                        <td style="width:150px !important;text-align:center">@item.vmGuardian.Name</td>
-                        <td style="width:80px !important;text-align:center">@item.vmGuardian.PhoneNo</td>
-                        <td style="width:120px !important;text-align:center">@item.vmSchools.SchoolName</td>
-                        <td style="width:110px !important;text-align:center">@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")</td>
-                        <td>@item.vmPatientTable.CloseDate.ToString()</td>
-                        <td>
-                            <div class="w3-container  w3-cell w3-cell-middle" style="color:#2196F3">
-                                <span onclick="showPatient('@item.vmPatientTable.PpsNo')"><i style="margin-left:10px;color:#2196F3" class="glyphicon glyphicon-eye-open"></i></span>
-                            </div>
+                        <td id="FirstName" style="">@item.vmUserAcc.FirstName</td>
+                        <td id="SocialSecurityNo" style="">@item.vmPatientTable.SocialSecurityNo</td>
+                        <td id="Name" style="">@item.vmPatientTable.Name</td>
+                        <td id="AddressLineOne" style="">@item.vmPatientTable.AddressLineOne</td>
+                        <td id="City" style="">@item.vmPatientTable.City</td>
+                        <td id="County" style="">@item.vmPatientTable.County</td>
+                        <td id="Gname"style="">@item.vmGuardian.Name</td>
+                        <td id="PhoneNo" style="">@item.vmGuardian.PhoneNo</td>
+                        <td id="SchoolName"style="">@item.vmSchools.SchoolName</td>
+                        <td id="OpenDate" style="">@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")</td>
+                        @*<td>@item.vmPatientTable.CloseDate.ToString()</td>*@
+                        <td id="Eye">
+                            @*<div  class="w3-container  w3-cell w3-cell-" style="color:#2196F3">*@
+                                <span onclick="showPatient('@item.vmPatientTable.PpsNo')"><i style="" class="glyphicon glyphicon-eye-open"></i></span>
+                            @*</div>*@
                         </td>
-
+                        <td>@item.vmPatientTable.CloseDate.ToString()</td>
                     </tr>
                 }
             </table>

@@ -1,10 +1,47 @@
 ﻿body {
 }
+/**************************Laptop***************************************/
 #myContainer{
     background-color:#F4F4F5 !important;
     width:990px !important;
     height:700px;
 }
+                    /************************************/
+                    #FirstName{
+                        width:100px !important;background-color:purple;
+                    }
+                    #SocialSecurityNo{
+                        width:150px !important;text-align:center;
+                    }
+                    #name{
+                        width:130px !important;
+                    }
+                    #AddressLineOne{
+                        width:130px !important;
+                    }
+                    #City{
+                        width:70px !important;text-align:center;
+                    }
+                    #County{
+                        width:70px !important;text-align:center;
+                    }
+                    #Gname{
+                        width:150px !important;text-align:center;
+                    }
+                    #PhoneNo{
+                        width:80px !important;text-align:center;
+                    }
+                    #SchoolName{
+                        width:120px !important;text-align:center;
+                    }
+                    #OpenDate{
+                        width:110px !important;text-align:center;
+                    }
+
+                    /*********************************************/
+#ViewAllPatients{
+        border-right:2px solid white !important;
+    }
 #Index{
     background-color:#F7F7F7; border-radius:6px; margin-left:380px; padding: 20px 25px 30px;
 }
@@ -16,11 +53,15 @@
     /*background-color:#F4F4F5 !important;
     width:990px !important;*/
 }
-
+/***********************************************************************/
 @media screen and (max-width: 1100px){
     .container{
         /*background-color:red; width:700px;*/
         /*max-width: 100%; position: relative; overflow: hidden;*/
+        /*class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; "*/
+    }
+    #ViewAllPatients{
+        border-right:20px solid white !important;
     }
     #myContainer{
         background-color:lime !important;
@@ -34,14 +75,47 @@
     }
     #RemoveOT{
         height:50px;width:590px; margin-left:10px; margin-top:50px
-    }
-}
+    } /************************************/
+                    /*#FirstName{
+                        width:100px !important;background-color:red;
+                    }
+                    #SocialSecurityNo{
+                        width:150px !important;text-align:center;
+                    }
+                    #name{
+                        width:130px !important;
+                    }
+                    #AddressLineOne{
+                        width:130px !important;
+                    }
+                    #City{
+                        width:70px !important;text-align:center;
+                    }
+                    #County{
+                        width:70px !important;text-align:center;
+                    }
+                    #Gname{
+                        width:150px !important;text-align:center;
+                    }
+                    #PhoneNo{
+                        width:80px !important;text-align:center;
+                    }
+                    #SchoolName{
+                        width:120px !important;text-align:center;
+                    }
+                    #OpenDate{
+                        width:110px !important;text-align:center;
+                    }*/
 
+                    /*********************************************/
+}
+/************************Landscape***************************************/
 @media screen and (max-width: 1024px){ /*width of iPad*/
     .container{
         /*background-color:red; width:700px;*/
         /*max-width: 100%; position: relative; overflow: hidden;*/
     }
+
     #myContainer{
         background-color:lime !important;
         width:900px !important;
@@ -49,14 +123,60 @@
         height:700px;
         float:none;
     }
+    #ViewAllPatients{
+        border-right:2px solid white !important;
+    }
+    /****************************************************************/
+    #AllPatientsRow{
+        width:980px !important;
+    }
+                        #FirstName{
+                        width:90px !important;
+                        }
+                        #SocialSecurityNo{
+                            width:100px !important;text-align:center;
+                        }
+                        #Name{
+                        width:100px !important; ;text-align:center;
+                        }
+                        #AddressLineOne{
+                            width:100px !important;
+                        }
+                        #City{
+                            width:40px !important;text-align:center;
+                        }
+                        #County{
+                            width:70px !important;text-align:center;
+                        }
+                        #Gname{
+                            width:110px !important;text-align:center;
+                        }
+                        #PhoneNo{
+                            width:75px !important;text-align:center;
+                        }
+                        #SchoolName{
+                            width:80px !important;text-align:center;
+                        }
+                        #OpenDate{
+                            width:30px !important;text-align:center;
+                        }
+                        #Eye{
+                            min-width:30px !important; padding-left:37px;color:#2196F3;color:#2196F3
+                        }
+                        /***************************************************************/
     #Index{
-        background-color:lightcoral; border-radius:6px; margin-left:230px; margin-top:30px; padding: 20px 25px 30px;
+         width:350px;
+        background-color:yellow; 
+        border-radius:6px;
+        margin-left:330px; 
+        margin-top:30px; 
+        padding: 20px 25px 30px;
     }
     #RemoveOT{
         height:50px;width:590px; margin-left:10px; margin-top:50px
     }
 }
-
+/***********************Portrate***************************************/
 @media screen and (max-width: 768px){ /*width of iPad*/
     #myContainer{
         background-color:lightcoral !important;
@@ -65,10 +185,42 @@
     }
     #Index {
         width:300px;
-        background-color: lime;
+        background-color: deeppink;
         border-radius: 6px;
-        margin-left: 130px;
+        margin-left: 230px;
         margin-top:90px;
         padding: 20px 25px 30px;
     }
+                        /****************************************************************/
+                        #FirstName{
+                        width:40px !important;background-color:lime;
+                        }
+                        #SocialSecurityNo{
+                            width:120px !important;text-align:center;
+                        }
+                        #Name{
+                        width:100px !important; background-color:lime;
+                        }
+                        #AddressLineOne{
+                            width:90px !important;
+                        }
+                        #City{
+                            width:40px !important;text-align:center;background-color:lime;
+                        }
+                        #County{
+                            width:40px !important;text-align:center;
+                        }
+                        #Gname{
+                            width:90px !important;text-align:center;background-color:lime;
+                        }
+                        #PhoneNo{
+                            width:50px !important;text-align:center;
+                        }
+                        #SchoolName{
+                            width:70px !important;text-align:center;background-color:lime;
+                        }
+                        #OpenDate{
+                            width:100px !important;text-align:center;
+                        }
+                        /***************************************************************/
 }

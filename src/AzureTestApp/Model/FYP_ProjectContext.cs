@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+
 namespace AzureTestApp.Model
 {
     public partial class FYP_ProjectContext : DbContext
@@ -12,9 +13,11 @@ namespace AzureTestApp.Model
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.            
 
-            optionsBuilder.UseSqlServer(@"Data Source=dominicbrennan.database.windows.net;Initial Catalog=FYP_Project;Integrated Security=False;User ID=dominicbrennan;Password=Fld118yi;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer(@"Data Source=dominicbrennan.database.windows.net;Initial Catalog=FYP_Project;Persist Security Info=True;User ID=dominicbrennan;Password=Fld118yi;;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;");
+
+            //Data Source=dominicbrennan.database.windows.net;Initial Catalog=FYP_Project;Persist Security Info=True;User ID=dominicbrennan;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Column Encryption Setting=Enabled
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
