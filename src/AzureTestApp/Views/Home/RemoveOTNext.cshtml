@@ -50,7 +50,6 @@
         function reassignPatient1(patientId) {
             $.ajax({
                 type: "GET",
-                @*url: '@Url.Action("Therapist_Patient_Details")',*@
                 url: '@Url.Action("Therapist_Patient_Details_For_Deleting")',
                 data: { id: patientId },
                 success: function (data) {

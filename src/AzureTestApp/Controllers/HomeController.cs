@@ -14,10 +14,6 @@ namespace AzureTestApp.Controllers
     {
         private FYP_ProjectContext _context = new FYP_ProjectContext();
 
-        //public HomeController(FYP_ProjectContext context)
-        //{
-        //    _context = context;
-        //}
         #region Index
         public IActionResult Index()
         {
@@ -31,10 +27,8 @@ namespace AzureTestApp.Controllers
             if (account != null)
             {
                 HttpContext.Session.SetString("UserId", account.UserId.ToString());
-                HttpContext.Session.SetString("UserName", account.UserName);
-               
-               var test3 = account.UserId;
-                //return RedirectToAction("Welcome",null, account.UserId);
+                HttpContext.Session.SetString("UserName", account.UserName);               
+              
                 return RedirectToAction("Welcome",null, new {id = account.UserId });
             }
             else
@@ -67,7 +61,6 @@ namespace AzureTestApp.Controllers
                                               vmSchools = s,
                                               vmUserAcc = uA
                                           }).ToList();
-                    //var ss = patientDetails;
                     return View("Details", patientDetails);
                 }
                 else
@@ -84,7 +77,6 @@ namespace AzureTestApp.Controllers
                                               vmSchools = s,
                                               vmUserAcc = uA
                                           }).ToList();
-                    //var ss = patientDetails;
                     return View("Details", patientDetails);
                 }
             }//end if (search != null)
@@ -146,8 +138,7 @@ namespace AzureTestApp.Controllers
             } //end if (HttpContext.Session.GetString("UserID") != null)
             #endregion
 
-            //return View();
-            //return RedirectToAction("Welcome");
+           
             return RedirectToAction("Index");
         }
         #endregion
@@ -239,7 +230,7 @@ namespace AzureTestApp.Controllers
         {
             if (HttpContext.Session.GetString("UserId") != null)
             {
-                //not needed??
+                
                 List<SchoolLists> schoolList = _context.SchoolLists.ToList();
                 ViewBag.schoolList = new SelectList(schoolList, "SchoolId", "SchoolName");
                 var date = DateTime.Now.ToString("dd/MM/yyyy");
@@ -285,7 +276,7 @@ namespace AzureTestApp.Controllers
 
             if (HttpContext.Session.GetString("UserId") != null)
             {
-                //call up all records wit todays date..                
+                              
                 DateTime today = DateTime.Today;
                 ViewBag.TodaysDate = today;
                 var occID = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
@@ -345,21 +336,7 @@ namespace AzureTestApp.Controllers
             List<UserAccount> OTList = _context.UserAccount.ToList();
             ViewBag.OTList = new SelectList(OTList, "UserId", "FirstName");
 
-            #region remove
-
-            var patientDetails = (from pA in _context.PatientAccount
-                                  join g in _context.Guardians on pA.GuardianId equals g.GuardianId
-                                  join s in _context.SchoolLists on pA.SchoolId equals s.SchoolId
-                                  join uA in _context.UserAccount on pA.OccId equals uA.UserId
-                                  where pA.PpsNo.Equals(id)
-                                  select new PatientDetailsViewModel
-                                  {
-                                      vmPatientTable = pA,
-                                      vmGuardian = g,
-                                      vmSchools = s,
-                                      vmUserAcc = uA
-                                  }).ToList();
-            #endregion
+            
             return PartialView("_ReassignPatient");
         }
         #endregion
@@ -400,7 +377,6 @@ namespace AzureTestApp.Controllers
                                       vmUserAcc = uA,
                                       vmNoteTable = nO
                                   }).ToList();
-            var x = patientDetails;
             return PartialView("_PatientNotes", patientDetails);
         }
         #endregion
@@ -442,8 +418,7 @@ namespace AzureTestApp.Controllers
 
             List<Tasks> taskList = _context.TaskName.ToList();
             ViewBag.taskList = new SelectList(taskList, "TaskId", "TaskType");
-
-            //ViewBag.PatientID = id;
+                        
             return PartialView("_AddATask");
         }
         [HttpPost]
@@ -546,8 +521,6 @@ namespace AzureTestApp.Controllers
         #region Get Patients for specific therapist with tasks
         public ActionResult Therapist_Patient_Details(int? id, PatientDetailsViewModel student)
         {
-            //reassign Task button
-            //get a list of all the uncompleted tasks fot this therapist
             List<UserAccount> OTList2 = _context.UserAccount.ToList();
             ViewBag.OTList2 = new SelectList(OTList2, "UserId", "FirstName");
 

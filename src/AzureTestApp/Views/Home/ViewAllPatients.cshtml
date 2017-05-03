@@ -37,9 +37,6 @@
         View
     </div>
 </div>
-<div class="w3-container  w3-cell w3-cell-middle" style="background-color:white">
-
-</div>
 <div class="panel-body" style="height:398px">
     <div class="right-inner-addon" style="width:105px;">
         @if (Model.Any())
@@ -48,7 +45,7 @@
                 @foreach (var item in Model)
                 {
                     <tr style="height:50px !important">
-                        <td id="FirstName" style="">@item.vmUserAcc.FirstName</td>
+                        <td id="StudentFirstName" style="">@item.vmUserAcc.FirstName</td>
                         <td id="SocialSecurityNo" style="">@item.vmPatientTable.SocialSecurityNo</td>
                         <td id="Name" style="">@item.vmPatientTable.Name</td>
                         <td id="AddressLineOne" style="">@item.vmPatientTable.AddressLineOne</td>
@@ -58,11 +55,8 @@
                         <td id="PhoneNo" style="">@item.vmGuardian.PhoneNo</td>
                         <td id="SchoolName"style="">@item.vmSchools.SchoolName</td>
                         <td id="OpenDate" style="">@item.vmPatientTable.OpenDate.ToString("dd/MM/yyyy")</td>
-                        @*<td>@item.vmPatientTable.CloseDate.ToString()</td>*@
                         <td id="Eye">
-                            @*<div  class="w3-container  w3-cell w3-cell-" style="color:#2196F3">*@
                                 <span onclick="showPatient('@item.vmPatientTable.PpsNo')"><i style="" class="glyphicon glyphicon-eye-open"></i></span>
-                            @*</div>*@
                         </td>
                         <td>@item.vmPatientTable.CloseDate.ToString()</td>
                     </tr>
@@ -75,9 +69,9 @@
         }
     </div>
 </div>
-<div id="Detail2"></div>
+@*<div id="Detail2"></div>
 <div id="Detail3"></div>
-<div id="Detail"></div>
+<div id="Detail"></div>*@
 
 @section scripts
 {

@@ -1,14 +1,45 @@
 ﻿body {
 }
 /**************************Laptop***************************************/
+/******TaskDetails**********/
+#TaskDetailsContainer{
+    background-color:#F4F4F5; height:400px; padding:50px 100px;
+}
+/**************************/
+/*Today and Tomorrow Tasks*/
+#TaskHeading{
+    font:bold; background-color:#2196F3; color:#F7FFFF; word-spacing:36px;
+}
+#TaskHeading_tr{
+    min-width:125px !important;
+}
+/***************************/
+/*******AddANote***************/
+#AddANote{
+    width:850px;background-color:#FFFFFF; height:300px; margin-left:100px; margin-top:10px;
+}
+/******************************/
+/**************DetailsI******************/
+
+#DetailsI{
+    margin-left:10px !important;padding-left:5px !important; cursor:pointer;
+}
+/****************************************/
+#CreateStudentRecord{
+    width:850px; height:520px; margin-left:100px; margin-top:50px;
+}
+#RegisterNewOT{
+    width:850px;background-color:#FFFFFF; height:500px; margin-left:100px; margin-top:50px
+}
+#AddATask{
+    width:850px;background-color:#FFFFFF; height:400px; margin-left:100px; margin-top:10px;
+}
 #myContainer{
-    background-color:#F4F4F5 !important;
-    width:990px !important;
-    height:700px;
+    background-color:#F4F4F5 !important; width:990px !important; height:700px;
 }
                     /************************************/
-                    #FirstName{
-                        width:100px !important;background-color:purple;
+                    #StudentFirstName{
+                        width:100px !important;
                     }
                     #SocialSecurityNo{
                         width:150px !important;text-align:center;
@@ -48,13 +79,21 @@
 #RemoveOT{
     height:50px;width:590px; margin-left:70px; margin-top:50px
 }
+#testID{
+    width:170px !important;
+}
 .container{
     /*background-color:#F4F4F5;*/
     /*background-color:#F4F4F5 !important;
     width:990px !important;*/
 }
-/***********************************************************************/
+/*****************************************************************/
+/*****************************************************************/
+/******************************************************************/
 @media screen and (max-width: 1100px){
+    #TaskHeading{
+    font:bold; background-color:#2196F3; color:#F7FFFF; word-spacing:36px;
+}
     .container{
         /*background-color:red; width:700px;*/
         /*max-width: 100%; position: relative; overflow: hidden;*/
@@ -71,11 +110,15 @@
         float:none;
     }
     #Index{
-        background-color:yellow; border-radius:6px; margin-left:380px; margin-top:30px; padding: 20px 25px 30px;
+        border-radius:6px; margin-left:380px; margin-top:30px; padding: 20px 25px 30px;
     }
     #RemoveOT{
         height:50px;width:590px; margin-left:10px; margin-top:50px
-    } /************************************/
+    }
+    #testID{
+    width:170px !important;
+}
+     /************************************/
                     /*#FirstName{
                         width:100px !important;background-color:red;
                     }
@@ -109,28 +152,56 @@
 
                     /*********************************************/
 }
-/************************Landscape***************************************/
+
+/***************l*********************************************************/
+/***************l*********Landscape***************************************/
+/***************l*********************************************************/
 @media screen and (max-width: 1024px){ /*width of iPad*/
     .container{
         /*background-color:red; width:700px;*/
         /*max-width: 100%; position: relative; overflow: hidden;*/
     }
-
-    #myContainer{
-        background-color:lime !important;
-        width:900px !important;
-        margin-left:0px;
-        height:700px;
-        float:none;
+    /******TaskDetails**********/
+#TaskDetailsContainer{
+    background-color:#F4F4F5 !important; height:400px; padding:50px 100px;
+}
+#TaskDetails{
+    width:750px;background-color:#FFFFFF; height:200px; margin-left:0px !important; margin-top:10px
+}
+/**************************/
+    #TaskHeading{
+    padding-left:10px;font:bold; background-color:#2196F3; color:#F7FFFF; word-spacing:52px;
+}
+    /*******AddANote***************/
+#AddANote{
+    width:850px;background-color:#FFFFFF; height:300px; margin-left:30px !important; margin-top:10px;
+}
+/******************************/
+#LinksContainer{
+        font-size:18px;float:right; color:#2196F3;background-color:yellow !important;width:980px !important;
+    }
+#DetailsI{
+    margin-left:10px !important;padding-left:15px !important; cursor:pointer;
+}
+    #CreateStudentRecord{
+    width:850px;height:520px; margin-left:50px; margin-top:30px;
+}
+    #myContainer{background-color:lime !important; width:900px !important; margin-left:0px; height:700px; float:none;
     }
     #ViewAllPatients{
         border-right:2px solid white !important;
     }
+    #AddATask{
+    width:850px;background-color:#FFFFFF; height:400px; margin-left:50px; margin-top:10px;
+}
+    #RegisterNewOT{
+    width:850px;background-color:#FFFFFF; height:500px; margin-left:50px; margin-top:50px
+}
     /****************************************************************/
     #AllPatientsRow{
         width:980px !important;
     }
-                        #FirstName{
+                        #StudentFirstName{
                         width:90px !important;
                         }
                         #SocialSecurityNo{
@@ -143,7 +214,7 @@
                             width:100px !important;
                         }
                         #City{
-                            width:40px !important;text-align:center;
+                            width:40px !important;text-align:center; min-width:70px;
                         }
                         #County{
                             width:70px !important;text-align:center;
@@ -165,8 +236,7 @@
                         }
                         /***************************************************************/
     #Index{
-         width:350px;
-        background-color:yellow; 
+         width:330px;
         border-radius:6px;
         margin-left:330px; 
         margin-top:30px; 
@@ -175,24 +245,56 @@
     #RemoveOT{
         height:50px;width:590px; margin-left:10px; margin-top:50px
     }
+    #testID{
+   width:170px !important;
 }
+}
+/**********************************************************************/
 /***********************Portrate***************************************/
+/**********************************************************************/
 @media screen and (max-width: 768px){ /*width of iPad*/
     #myContainer{
         background-color:lightcoral !important;
         width:990px !important;
         height:700px;
     }
+    #TaskHeading{
+    /*font:bold; background-color:#2196F3; color:#F7FFFF; word-spacing:36px;*/
+    font:bold; background-color:lime; color:#F7FFFF; word-spacing:52px;
+}
+    #TaskDetailsContainer{
+    background-color:#F4F4F5 !important; height:300px !important; padding:50px 50px !important; width:850px;
+}
+#TaskDetails{
+    width:700px;background-color:#FFFFFF; height:200px; margin-left:0px !important; margin-top:10px
+}
+    #CreateStudentRecord{
+    width:850px; height:620px; margin-left:5px; margin-top:50px;margin-right:10px;
+}
+    #LinksContainer{
+         font-size:20px;float:right; color:#2196F3;background-color:lime !important;width:980px !important;
+    }
+    #DetailsI{
+    margin-left:10px !important;padding-left:5px !important; cursor:pointer;
+}
+    #AddATask{
+    width:850px;background-color:#FFFFFF; height:400px; margin-left:5px; margin-top:10px;
+}
+    #RegisterNewOT{
+    width:850px;background-color:#FFFFFF; height:500px; margin-left:5px; margin-top:50px
+}
     #Index {
-        width:300px;
-        background-color: deeppink;
+        width:310px;
         border-radius: 6px;
         margin-left: 230px;
         margin-top:90px;
         padding: 20px 25px 30px;
     }
+    #profile-img{
+        margin-left:20px;
+    }
                         /****************************************************************/
-                        #FirstName{
+                        #StudentFirstName{
                         width:40px !important;background-color:lime;
                         }
                         #SocialSecurityNo{
@@ -223,4 +325,8 @@
                             width:100px !important;text-align:center;
                         }
                         /***************************************************************/
+                        #testID{
+    width:170px !important;
 }
+}
+/***********************************************************************/
