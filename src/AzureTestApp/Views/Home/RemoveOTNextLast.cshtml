@@ -1,8 +1,8 @@
 ﻿@model ICollection<AzureTestApp.Model.PatientDetailsViewModel>
 <h5 style="float:left;margin-bottom:15px;padding:5px">Remove OT</h5>
-<div class="container" style="background-color:#F4F4F5; height:500px">
-    <section style="width:900px; margin-left:0px; margin-top:30px; background-color:lightcoral">
-        <section style="height:50px;width:590px;float:left;margin-left:100px; margin-top:0px ">
+<div class="container" id="myContainer">
+    @*<section style="width:900px; margin-left:0px; margin-top:30px; background-color:lightcoral">*@
+        <section id="RemoveOT" >
             <ul class="nav nav-tabs" style="background-color:white">
                 <li class="active test"><a data-toggle="tab" href="#home">Remove Therapists <span><i>(Step 3 of 3)</i></span></a></li>
             </ul>
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </section>
-    </section>
+    @*</section>*@
 </div>
 
 @section scripts

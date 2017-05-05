@@ -29,7 +29,7 @@
             }
             @if (Model.Any())
             {
-                <table class="table table-condensed table-hover" style="width:715px;margin-left:195px">
+                <table id="T_P_ForDeleting" class="table table-condensed table-hover" style="width:715px;margin-left:195px">
                     @foreach (var item in Model)
                     {
                         <tr style="width:895px !important;">
@@ -57,30 +57,21 @@
 else
 {
     <div class="w3-cell-row" style="height:35px; margin-top:10px">
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:145px">
+
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:180px">
             Patient Name
         </div>
-
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:180px">
             Guardian Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:150px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:180px">
             School Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
-            Task Type
-        </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px">
-            Due Date
-        </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-            Assign to
-        </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px ">
-            Action
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:180px ">
+            Reassign Patient
         </div>
     </div>
-    <h2>OT has no patients</h2>
+    <h2 style="margin-left:155px">This therapist has no patients to be reassigned.</h2>
     <p style="float:right">@Html.ActionLink("Next", "RemoveOTNextLast", new { id = ViewBag.OT_Id }, new { @class = "btn btn-info", @style = "margin-top:10px" })</p>
 }
 <p>@Html.ActionLink("Back", "RemoveOTNext", new { id = ViewBag.OT_Id }, new { @class = "btn btn-info", @style = "margin-top:10px" })</p>

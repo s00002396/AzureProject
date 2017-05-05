@@ -1,0 +1,107 @@
+﻿@media screen and (max-width: 1024px){ 
+        .container{
+    }
+    /******TaskDetails**********/
+#TaskDetailsContainer{
+    background-color:#F4F4F5 !important; height:400px; padding:50px 100px;
+}
+#TaskDetails{
+    width:750px;background-color:#FFFFFF; height:200px; margin-left:0px !important; margin-top:10px
+}
+/**************************/
+    #TaskHeading{
+    padding-left:10px;font:bold; background-color:#2196F3; color:#F7FFFF; word-spacing:52px;
+}
+    /*******AddANote***************/
+#AddANote{
+    width:850px;background-color:#FFFFFF; height:300px; margin-left:30px !important; margin-top:10px;
+}
+/******************************/
+#LinksContainer{
+        font-size:18px;float:right; color:#2196F3;width:980px !important;
+    }
+#DetailsI{
+    margin-left:10px !important;padding-left:15px !important; cursor:pointer;
+}
+#ReAssignPatientContainer{
+    width:850px;background-color:#FFFFFF; height:200px !important; margin-left:10px !important; margin-top:10px
+}
+/*****************************************************************/
+#Table_Therapist_Pat_Details{
+    width:850px !important;margin-left:0px !important;
+}
+#Therapist_Pat_Details{
+    width:195px !important;padding-left:10px !important;
+}
+#_ReassignDetails{
+    width:850px;background-color:#FFFFFF; height:auto; margin-left:40px !important; margin-top:0px
+}
+/******************************************************************/
+    #CreateStudentRecord{
+    width:850px;height:570px; margin-left:50px; margin-top:30px;
+    }
+    #myContainer{background-color:#F4F4F5 !important; width:900px !important; margin-left:0px; height:700px; float:none;
+    }
+    #ViewAllPatients{
+        border-right:2px solid white !important;
+    }
+    #AddATask{
+    width:850px;background-color:#FFFFFF; height:400px; margin-left:50px; margin-top:10px;
+    }
+    #RegisterNewOT{
+    width:850px;background-color:#FFFFFF; height:500px; margin-left:50px; margin-top:50px
+    }
+    #T_P_ForDeleting{
+       margin-left:95px !important;
+    }
+    /****************************************************************/
+    #AllPatientsRow{
+        width:980px !important;
+    }
+                        #StudentFirstName{
+                        width:90px !important;
+                        }
+                        #SocialSecurityNo{
+                            width:100px !important;text-align:center;
+                        }
+                        #Name{
+                        width:100px !important; ;text-align:center;
+                        }
+                        #AddressLineOne{
+                            width:100px !important;
+                        }
+                        #City{
+                            width:40px !important;text-align:center; min-width:70px;
+                        }
+                        #County{
+                            width:70px !important;text-align:center;
+                        }
+                        #Gname{
+                            width:110px !important;text-align:center;
+                        }
+                        #PhoneNo{
+                            width:75px !important;text-align:center;
+                        }
+                        #SchoolName{
+                            width:80px !important;text-align:center;
+                        }
+                        #OpenDate{
+                            width:30px !important;text-align:center;
+                        }
+                        #Eye{
+                            min-width:30px !important; padding-left:37px;color:#2196F3 !important;
+                        }
+                        /***************************************************************/
+    #Index{
+         width:330px; border-radius:6px; margin-left:330px; margin-top:30px; padding: 20px 25px 30px;
+    }
+    #RemoveOT{
+        height:50px;width:590px; margin-left:30px !important; margin-top:50px
+    }
+    #RemovePatient{
+         margin-left:180px !important;
+    }
+    #testID{
+   width:170px !important;
+}
+}

@@ -11,7 +11,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td id="TaskHeading_tr" style="min-width:125px !important">@item.vmPatientTable.Name</td>
+                            <td id="TaskHeading_tr" style="min-width:125px !important; min-height:25px !important">@item.vmPatientTable.Name</td>
                             <td style="min-width:125px !important">@item.vmTaskTable.TaskType</td>
 
                             <td style="min-width:125px !important">@item.vmTPOT.DueDate.Value.ToString("dd/MM/yyyy")</td>

@@ -39,9 +39,9 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td style="width:95px !important; padding:15px">@item.vmUserAcc.FirstName</td>
-                        <td style="width:95px !important; padding:15px">@item.vmUserAcc.UserName&nbsp;&nbsp;&nbsp;</td>
-                        <td style="width:95px !important; padding:15px">@item.vmUserAcc.Email</td>
+                        <td style="width:115px !important; padding:15px">@item.vmUserAcc.FirstName</td>
+                        <td style="width:115px !important; padding:15px">@item.vmUserAcc.UserName&nbsp;&nbsp;&nbsp;</td>
+                        <td style="min-width:115px !important; padding:15px">@item.vmUserAcc.Email</td>
                         <td style="width:95px !important; padding:15px 15px 15px 45px">@item.vmUserAcc.UserId</td>
 
                         <td style="width:95px !important; padding:15px 15px 15px 35px">@Html.ActionLink("Reassign", "Therapist_Patient_Details", new { id = item.vmUserAcc.UserId }, new { @class = "btn btn-info btn-xs disabled" })</td>

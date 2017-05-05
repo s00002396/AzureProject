@@ -44,41 +44,46 @@ namespace AzureTestApp.Controllers
         {
             ViewBag.UserName = HttpContext.Session.GetString("Username");
             #region if (search != null)
+
             if (search != null)
             {
-                if (searchBy == "Social_Security_No")
+                if (HttpContext.Session.GetString("UserId") != null)
                 {
-                    var patientDetails = (from pA in _context.PatientAccount
-                                          join g in _context.Guardians on pA.GuardianId equals g.GuardianId
-                                          join s in _context.SchoolLists on pA.SchoolId equals s.SchoolId
-                                          join uA in _context.UserAccount on pA.OccId equals uA.UserId
+                    if (searchBy == "Social_Security_No")
+                    {
+                        var patientDetails = (from pA in _context.PatientAccount
+                                              join g in _context.Guardians on pA.GuardianId equals g.GuardianId
+                                              join s in _context.SchoolLists on pA.SchoolId equals s.SchoolId
+                                              join uA in _context.UserAccount on pA.OccId equals uA.UserId
 
-                                          where pA.SocialSecurityNo.Equals(search) || search == null
-                                          select new PatientDetailsViewModel
-                                          {
-                                              vmPatientTable = pA,
-                                              vmGuardian = g,
-                                              vmSchools = s,
-                                              vmUserAcc = uA
-                                          }).ToList();
-                    return View("Details", patientDetails);
+                                              where pA.SocialSecurityNo.Equals(search) || search == null
+                                              select new PatientDetailsViewModel
+                                              {
+                                                  vmPatientTable = pA,
+                                                  vmGuardian = g,
+                                                  vmSchools = s,
+                                                  vmUserAcc = uA
+                                              }).ToList();
+                        return View("Details", patientDetails);
+                    }
+                    else
+                    {
+                        var patientDetails = (from pA in _context.PatientAccount
+                                              join g in _context.Guardians on pA.GuardianId equals g.GuardianId
+                                              join s in _context.SchoolLists on pA.SchoolId equals s.SchoolId
+                                              join uA in _context.UserAccount on pA.OccId equals uA.UserId
+                                              where pA.Name.StartsWith(search) || search == null
+                                              select new PatientDetailsViewModel
+                                              {
+                                                  vmPatientTable = pA,
+                                                  vmGuardian = g,
+                                                  vmSchools = s,
+                                                  vmUserAcc = uA
+                                              }).ToList();
+                        return View("Details", patientDetails);
+                    }
                 }
-                else
-                {
-                    var patientDetails = (from pA in _context.PatientAccount
-                                          join g in _context.Guardians on pA.GuardianId equals g.GuardianId
-                                          join s in _context.SchoolLists on pA.SchoolId equals s.SchoolId
-                                          join uA in _context.UserAccount on pA.OccId equals uA.UserId
-                                          where pA.Name.StartsWith(search) || search == null
-                                          select new PatientDetailsViewModel
-                                          {
-                                              vmPatientTable = pA,
-                                              vmGuardian = g,
-                                              vmSchools = s,
-                                              vmUserAcc = uA
-                                          }).ToList();
-                    return View("Details", patientDetails);
-                }
+                return RedirectToAction("Index");
             }//end if (search != null)
             #endregion
 
@@ -146,39 +151,56 @@ namespace AzureTestApp.Controllers
         #region Register
         public ActionResult Register()
         {
-            return View();
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                return View();
+            }
+            return RedirectToAction("Index");
         }
         [HttpPost]
         public ActionResult Register(UserAccount user)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session.GetString("UserId") != null)
             {
-                _context.UserAccount.Add(user);
-                _context.SaveChanges();
+                if (user.IsAdmin == null)
+                {
+                    user.IsAdmin = false;
+                }
+                if (ModelState.IsValid)
+                {
+                    _context.UserAccount.Add(user);
+                    _context.SaveChanges();
 
-                ModelState.Clear();
-                ViewBag.Message = user.FirstName + " " + user.LastName + " was successfuly registered. ";
+                    ModelState.Clear();
+                    ViewBag.Message = user.FirstName + " " + user.LastName + " was successfuly registered. ";
+                }
+                return View();
             }
-            return View();
+            return RedirectToAction("Index");
         }
         #endregion
 
         #region View All Patients
         public ActionResult ViewAllPatients(int? id)
         {
-            var patientDetails = (from pA in _context.PatientAccount
-                                  join g in _context.Guardians on pA.GuardianId equals g.GuardianId
-                                  join s in _context.SchoolLists on pA.SchoolId equals s.SchoolId
-                                  join uA in _context.UserAccount on pA.OccId equals uA.UserId
-                                  select new PatientDetailsViewModel
-                                  {
-                                      vmPatientTable = pA,
-                                      vmGuardian = g,
-                                      vmSchools = s,
-                                      vmUserAcc = uA
-                                  }).ToList();
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                var patientDetails = (from pA in _context.PatientAccount
+                                      join g in _context.Guardians on pA.GuardianId equals g.GuardianId
+                                      join s in _context.SchoolLists on pA.SchoolId equals s.SchoolId
+                                      join uA in _context.UserAccount on pA.OccId equals uA.UserId
+                                      select new PatientDetailsViewModel
+                                      {
+                                          vmPatientTable = pA,
+                                          vmGuardian = g,
+                                          vmSchools = s,
+                                          vmUserAcc = uA
+                                      }).ToList();
 
-            return View(patientDetails);
+                return View(patientDetails);
+            } //end if (HttpContext.Session.GetString("UserID") != null)  
+
+            return RedirectToAction("Index");
         }
         #endregion
 
@@ -272,6 +294,7 @@ namespace AzureTestApp.Controllers
         #region Delete Student
         public IActionResult DeletePatient(int? id)
         {
+            //remove id?
             ViewBag.PatientID = id;
 
             if (HttpContext.Session.GetString("UserId") != null)
@@ -283,7 +306,7 @@ namespace AzureTestApp.Controllers
                 var myNewTasks = (from pA in _context.PatientAccount
                                   join gA in _context.Guardians on pA.GuardianId equals gA.GuardianId
                                   join uA in _context.UserAccount on pA.OccId equals uA.UserId
-                                  where pA.OccId.Equals(occID)
+                                  //where pA.OccId.Equals(occID)
                                   select new PatientDetailsViewModel
                                   {
                                       vmGuardian = gA,
@@ -293,7 +316,7 @@ namespace AzureTestApp.Controllers
 
                 return View(myNewTasks);
             }
-            return View();
+            return RedirectToAction("Index");
         }
         //[HttpPost]
         public IActionResult DeletePatient1(int? id)
@@ -346,12 +369,12 @@ namespace AzureTestApp.Controllers
         public IActionResult ReassignPatient(int id, int id2, PatientDetailsViewModel student)
         {
             PatientAccount patient = _context.PatientAccount.Single(p => p.PpsNo == id);
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 patient.OccId = student.vmPatientTable.OccId;
                 _context.PatientAccount.Update((patient));
                 _context.SaveChanges();
-            }
+            //}
 
             return RedirectToAction("Details", new { id = id });
         }
@@ -425,10 +448,10 @@ namespace AzureTestApp.Controllers
         public IActionResult AddTask(PatientDetailsViewModel student, int id)
         {
             ViewBag.PatientID = id;
-
-            if (ModelState.IsValid)
-            {
-                OtTasks newTask = new OtTasks()
+            //need different viewmodel??
+            //if (ModelState.IsValid)
+            //{
+            OtTasks newTask = new OtTasks()
                 {
                     TaskId = student.vmTaskTable.TaskId,
                     OccId = student.vmPatientTable.OccId,
@@ -441,7 +464,7 @@ namespace AzureTestApp.Controllers
                 _context.SaveChanges();
                 ModelState.Clear();
                 ViewBag.Message = "Note was successfuly added. ";
-            }
+            //}
             return RedirectToAction("Details", new { id = id });
         }
         #endregion
@@ -484,7 +507,9 @@ namespace AzureTestApp.Controllers
         #region Remove OT
         public IActionResult RemoveOT(int? id)
         {
-            var otDetails = (from uA in _context.UserAccount
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                var otDetails = (from uA in _context.UserAccount
 
                              select new PatientDetailsViewModel
                              {
@@ -492,30 +517,38 @@ namespace AzureTestApp.Controllers
                              }).ToList();
 
             return View(otDetails);
+            } 
+            return RedirectToAction("Index");
         }
         public IActionResult RemoveOTNext(int? id)
         {
-            var otDetails = (from uA in _context.UserAccount
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                var otDetails = (from uA in _context.UserAccount
                              where uA.UserId.Equals(id)
                              select new PatientDetailsViewModel
                              {
                                  vmUserAcc = uA,
                              }).ToList();
-            var test = id;
 
-            return View(otDetails);
-        }
+                return View(otDetails);
+            }           
+            return RedirectToAction("Index");
+    }
         public IActionResult RemoveOTNextLast(int? id)
         {
-            var otDetails = (from uA in _context.UserAccount
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                var otDetails = (from uA in _context.UserAccount
                              where uA.UserId.Equals(id)
                              select new PatientDetailsViewModel
                              {
                                  vmUserAcc = uA,
                              }).ToList();
-            var test = id;
-            return View(otDetails);
-        }
+                return View(otDetails);
+            } 
+            return RedirectToAction("Index");
+}
         #endregion
 
         #region Get Patients for specific therapist with tasks
@@ -523,8 +556,9 @@ namespace AzureTestApp.Controllers
         {
             List<UserAccount> OTList2 = _context.UserAccount.ToList();
             ViewBag.OTList2 = new SelectList(OTList2, "UserId", "FirstName");
-
-            var patientDetails = (from pA in _context.PatientAccount
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                var patientDetails = (from pA in _context.PatientAccount
                                   join g in _context.Guardians on pA.GuardianId equals g.GuardianId
                                   join s in _context.SchoolLists on pA.SchoolId equals s.SchoolId
                                   join uA in _context.UserAccount on pA.OccId equals uA.UserId
@@ -542,9 +576,11 @@ namespace AzureTestApp.Controllers
                                       vmTaskTable = tsk
                                   }).ToList();
 
-            ViewBag.noteList = patientDetails;
-            ViewBag.OT_Id = id;
-            return View(patientDetails);
+                ViewBag.noteList = patientDetails;
+                ViewBag.OT_Id = id;
+                return View(patientDetails);
+            }
+            return RedirectToAction("Index");
         }
         #endregion
 
@@ -553,8 +589,9 @@ namespace AzureTestApp.Controllers
         {
             List<UserAccount> OTList2 = _context.UserAccount.ToList();
             ViewBag.OTList2 = new SelectList(OTList2, "UserId", "FirstName");
-
-            var patientDetails = (from pA in _context.PatientAccount
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                var patientDetails = (from pA in _context.PatientAccount
                                   join g in _context.Guardians on pA.GuardianId equals g.GuardianId
                                   join s in _context.SchoolLists on pA.SchoolId equals s.SchoolId
                                   join uA in _context.UserAccount on pA.OccId equals uA.UserId
@@ -567,12 +604,101 @@ namespace AzureTestApp.Controllers
                                       vmUserAcc = uA
                                   }).ToList();
 
-            ViewBag.noteList = patientDetails;
-            ViewBag.OT_Id = id;
-            return View(patientDetails);
+                ViewBag.noteList = patientDetails;
+                ViewBag.OT_Id = id;
+                return View(patientDetails);
+            }
+            return RedirectToAction("Index");
         }
         #endregion
 
+        #region Reassign Tasks for OT
+        public IActionResult ReassignDetails()
+        {
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                List<UserAccount> OTList = _context.UserAccount.ToList();
+                ViewBag.OTList = new SelectList(OTList, "UserId", "FirstName");
+                return PartialView("_ReAssignDetails");
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult ReassignDetails(int id, int id2, PatientDetailsViewModel student)
+        {
+            List<UserAccount> OTList = _context.UserAccount.ToList();
+            ViewBag.OTList = new SelectList(OTList, "UserId", "FirstName");
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                OtTasks reassign = _context.OtTasks.Where(pp => pp.OtTaskId == id).Single();
+                //if (ModelState.IsValid)
+                //{
+                    reassign.OccId = student.vmPatientTable.OccId;
+                    _context.OtTasks.Update((reassign));
+                    _context.SaveChanges();
+                //}
+                return RedirectToAction("Therapist_Patient_Details", new { id = id2 });
+            }
+            return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region ReassignPatientDelete GET
+        public IActionResult ReassignPatientDelete(int id, string search)
+        {
+
+            var searchID = Convert.ToInt32(search);
+            List<SchoolLists> schoolList = _context.SchoolLists.ToList();
+
+            ViewBag.schoolList = new SelectList(schoolList, "SchoolId", "SchoolName");
+            ViewBag.PatientNumber = id;
+
+            List<UserAccount> OTList = _context.UserAccount.ToList();
+            ViewBag.OTList = new SelectList(OTList, "UserId", "FirstName");
+            
+            return PartialView("_ReAssignDelete");
+        }
+        #endregion
+
+        #region ReassignPatientDelete POST
+        [HttpPost]
+        public IActionResult ReassignPatientDelete(int id, int id2, PatientDetailsViewModel student)
+        {
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                PatientAccount patient = _context.PatientAccount.Single(p => p.PpsNo == id);
+                //if (ModelState.IsValid)
+                //{
+                    patient.OccId = student.vmPatientTable.OccId;
+                    _context.PatientAccount.Update((patient));
+                    _context.SaveChanges();
+                //}
+
+                return RedirectToAction("Therapist_Patient_Details_For_Deleting", new { id = patient.OccId });
+            }
+            return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Delete OT
+        public IActionResult DeleteOT(int? id)
+        {
+            ViewBag.PatientID = id;
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                UserAccount removeOT = _context.UserAccount.Where(c => c.UserId == id).Single();
+
+                if (ModelState.IsValid)
+                {
+                    _context.UserAccount.Remove(removeOT);
+                    _context.SaveChanges();
+                    ViewBag.Message = "OT was successfuly removed. ";
+                }
+                return RedirectToAction("RemoveOT");
+            }
+            return RedirectToAction("Index");
+        }
+        #endregion
 
         #region Error
         public IActionResult Contact()

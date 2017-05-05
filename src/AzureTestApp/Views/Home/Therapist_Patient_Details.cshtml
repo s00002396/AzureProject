@@ -5,23 +5,23 @@
     <h2>Patients with pending tasks for @Model.FirstOrDefault().vmUserAcc.FirstName</h2>
     <div class="w3-cell-row" style="height:35px; margin-top:10px">
 
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px; text-align:center">
             Patient Name
         </div>
 
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px; text-align:center">
             Guardian Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:165px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:165px; text-align:center">
             School Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:195px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:195px; text-align:center">
             Task Type
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px; text-align:center">
             Due Date
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px ">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px; text-align:center ">
             Edit
         </div>
     </div>
@@ -37,18 +37,18 @@
             }
             @if (Model.Any())
             {
-                <table class="table table-condensed table-hover" style="width:1000px;margin-left:45px;">
+                <table id="Table_Therapist_Pat_Details" class="table table-condensed table-hover" style="width:1000px;margin-left:45px;">
                     @foreach (var item in Model)
                     {
                         <tr style="width:895px !important">
                             @using (Html.BeginForm())
                             {
                                 @Html.AntiForgeryToken()
-                                <td style="width:195px !important;padding-left:60px">@item.vmPatientTable.Name</td>
+                                <td id="Therapist_Pat_Details" style="width:195px !important;padding-left:50px">@item.vmPatientTable.Name</td>
 
-                                <td style="width:195px !important;padding-left:25px">@item.vmGuardian.Name</td>
+                                <td style="width:175px !important;padding-left:10px">@item.vmGuardian.Name</td>
                                 <td style="width:165px !important">@item.vmSchools.SchoolName</td>
-                                <td style="width:175px !important; padding-left:0px">@item.vmTaskTable.TaskType</td>
+                                <td style="width:185px !important; padding-left:0px">@item.vmTaskTable.TaskType</td>
 
                                 <td style="width:185px !important">@item.vmTPOT.DueDate.Value.ToString("dd/MM/yyyy")</td>
                                 <td>
@@ -69,30 +69,28 @@
 else
 {
     <div class="w3-cell-row" style="height:35px; margin-top:10px">
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:145px">
+
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px; text-align:center">
             Patient Name
         </div>
 
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px; text-align:center">
             Guardian Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:150px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white;  width:165px; text-align:center">
             School Name
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:150px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:195px; text-align:center">
             Task Type
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px">
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px; text-align:center">
             Due Date
         </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; ">
-            Assign to
-        </div>
-        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:160px ">
-            Action
+        <div class="w3-container w3-blue w3-cell w3-cell-middle" style="border-right:2px solid white; width:165px; text-align:center ">
+            Edit
         </div>
     </div>
-    <h2>OT has no outstanding tasks</h2>
+    <h2 style="margin-left:155px">This therapist has no outstanding tasks.</h2>
     <p style="float:right">@Html.ActionLink("Next", "RemoveOTNext", new { id = ViewBag.OT_Id }, new { @class = "btn btn-info", @style = "margin-top:10px" })</p>
 }
 <p>@Html.ActionLink("Back", "RemoveOT", new { id = ViewBag.OT_Id }, new { @class = "btn btn-info", @style = "margin-top:10px" })</p>

@@ -1,9 +1,9 @@
 ﻿@model ICollection<AzureTestApp.Model.PatientDetailsViewModel>
 <h5 style="float:left;margin-bottom:15px;padding:5px">Remove OT</h5>
 <h6 style="float:left;margin-bottom:15px;padding:5px">*Reassign patients for this therapist</h6>
-<div class="container" style="background-color:#F4F4F5; height:500px">
-    <section style="width:900px; margin-left:0px; margin-right:0px; background-color:lightcoral">
-        <section style="height:50px;width:590px;float:left;margin-left:100px; margin-top:0px ">
+<div class="container" id="myContainer">
+    @*<section style="width:900px; margin-left:0px; margin-right:0px; background-color:lightcoral">*@
+        <section id="RemoveOT">
             <ul class="nav nav-tabs" style="background-color:white">
                 <li class="active test" style="color:blue"><a data-toggle="tab" href="#home">Reassign Patients <span><i>(Step 2 of 3)</i></span></a></li>
             </ul>
@@ -12,15 +12,12 @@
                     <div class="box" style="width:790px;">
                         <div class="w3-card-4" style="background-color:#FFFFFF; ">
                             @Html.Partial("_ReAssignPatientDelete", Model)
-
-                            @*@Html.Partial("_ReAssignTasks_Delete", Model)*@
-
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    </section>
+    @*</section>*@
 </div>
 
 @section scripts
